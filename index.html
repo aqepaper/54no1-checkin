@@ -72,7 +72,7 @@ body::before {
 .title {
   font-family: 'Noto Serif TC', serif;
   font-size: clamp(20px, 5vw, 26px);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ink);
   letter-spacing: 0.1em;
   margin-bottom: 4px;
@@ -98,7 +98,7 @@ body::before {
 .card-title {
   font-family: 'Noto Serif TC', serif;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ink);
   margin-bottom: 1.3rem;
   text-align: center;
@@ -117,7 +117,7 @@ body::before {
 label {
   display: block;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ink-mid);
   margin-bottom: 6px;
   letter-spacing: 0.05em;
@@ -155,7 +155,7 @@ input::placeholder {
   border: none;
   border-radius: 8px;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   font-family: 'Noto Sans TC', sans-serif;
   cursor: pointer;
   transition: all 0.2s;
@@ -340,7 +340,7 @@ input::placeholder {
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   flex-shrink: 0;
 }
 
@@ -440,7 +440,7 @@ input::placeholder {
 
 .stat-number {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--gold);
   margin-bottom: 4px;
 }
@@ -484,7 +484,7 @@ input::placeholder {
 
 .student-name {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ink);
   margin-bottom: 4px;
 }
@@ -498,7 +498,7 @@ input::placeholder {
 .student-status {
   font-size: 11px;
   color: var(--teal);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .student-card:not(.checked-in) .student-status {
@@ -515,21 +515,21 @@ input::placeholder {
   <div class="header">
     <div class="logo" style="font-size:56px; margin-bottom:0.3rem;">🍀</div>
     <h1 class="title">54期男1組</h1>
-    <div id="lesson-banner" style="margin-top:0.6rem; background:rgba(26,107,90,0.1); border-radius:12px; padding:10px 20px; font-size:15px; font-weight:600; color:var(--teal); letter-spacing:0.05em; min-height:40px;"></div>
+    <div id="lesson-banner" style="margin-top:0.6rem; background:rgba(26,107,90,0.1); border-radius:12px; padding:10px 20px; font-size:15px; font-weight: 400; color:var(--teal); letter-spacing:0.05em; min-height:40px;"></div>
   </div>
 
   <!-- 統計列 -->
   <div id="home-stats" style="display:flex; gap:10px; width:100%; margin-bottom:1rem;">
     <div style="flex:1; background:rgba(26,107,90,0.1); border-radius:10px; padding:12px 8px; text-align:center;">
-      <div id="hs-attend" style="font-size:26px; font-weight:700; color:var(--teal);">--</div>
+      <div id="hs-attend" style="font-size:26px; font-weight: 400; color:var(--teal);">--</div>
       <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">出席</div>
     </div>
     <div style="flex:1; background:rgba(196,150,74,0.12); border-radius:10px; padding:12px 8px; text-align:center;">
-      <div id="hs-leave" style="font-size:26px; font-weight:700; color:var(--gold);">--</div>
+      <div id="hs-leave" style="font-size:26px; font-weight: 400; color:var(--gold);">--</div>
       <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">請假</div>
     </div>
     <div style="flex:1; background:rgba(156,163,175,0.15); border-radius:10px; padding:12px 8px; text-align:center;">
-      <div id="hs-pending" style="font-size:26px; font-weight:700; color:#9ca3af;">--</div>
+      <div id="hs-pending" style="font-size:26px; font-weight: 400; color:#9ca3af;">--</div>
       <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">未回報</div>
     </div>
   </div>
@@ -539,7 +539,7 @@ input::placeholder {
     <div class="card-title">報到系統</div>
     
     <div class="field">
-      <label style="font-size:14px; color:var(--ink); font-weight:600; letter-spacing:0.06em;">登入碼：手機後四碼</label>
+      <label style="font-size:14px; color:var(--ink); font-weight: 400; letter-spacing:0.06em;">登入碼：手機後四碼</label>
       <input type="tel" id="login-code" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="font-size:24px; letter-spacing:0.3em; text-align:center;" onkeydown="if(event.key==='Enter') handleStudentLogin()">
     </div>
 
@@ -561,7 +561,7 @@ input::placeholder {
 <div id="screen-checkin" class="screen">
   <div class="header">
     <div class="logo">🍀</div>
-    <div id="student-display" style="font-size: clamp(24px, 6vw, 32px); font-family: 'Noto Serif TC', serif; font-weight: 600; color: var(--ink); letter-spacing: 0.1em; margin-top: 0.2rem;"></div>
+    <div id="student-display" style="font-size: clamp(24px, 6vw, 32px); font-family: 'Noto Serif TC', serif; font-weight: 400; color: var(--ink); letter-spacing: 0.1em; margin-top: 0.2rem;"></div>
   </div>
 
   <div class="card">
@@ -583,12 +583,12 @@ input::placeholder {
           <div id="greeting-text"></div>
         </div>
         <!-- 步驟二：選擇出席狀態 -->
-        <div style="font-size:14px; font-weight:600; color:var(--ink); margin-bottom:0.8rem; letter-spacing:0.05em;">請選擇今日出席狀態</div>
+        <div style="font-size:14px; font-weight: 400; color:var(--ink); margin-bottom:0.8rem; letter-spacing:0.05em;">請選擇今日出席狀態</div>
         <div style="display: flex; gap: 12px; margin-bottom:1rem;">
-          <button type="button" id="btn-attend" onclick="selectStatus('出席')" style="flex:1; padding: 18px 8px; border-radius: 12px; border: 2px solid var(--border); background: #fff; font-size: 17px; font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all 0.2s; color: var(--ink); font-weight:500;">
+          <button type="button" id="btn-attend" onclick="selectStatus('出席')" style="flex:1; padding: 18px 8px; border-radius: 12px; border: 2px solid var(--border); background: #fff; font-size: 17px; font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all 0.2s; color: var(--ink); font-weight: 400;">
             出席
           </button>
-          <button type="button" id="btn-absent" onclick="selectStatus('請假')" style="flex:1; padding: 18px 8px; border-radius: 12px; border: 2px solid var(--border); background: #fff; font-size: 17px; font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all 0.2s; color: var(--ink); font-weight:500;">
+          <button type="button" id="btn-absent" onclick="selectStatus('請假')" style="flex:1; padding: 18px 8px; border-radius: 12px; border: 2px solid var(--border); background: #fff; font-size: 17px; font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all 0.2s; color: var(--ink); font-weight: 400;">
             請假
           </button>
         </div>
@@ -613,7 +613,7 @@ input::placeholder {
     <div id="checkin-result" style="display: none;">
       <div style="text-align: center; padding: 1rem 0 1.5rem;">
         <div style="font-size: 52px; margin-bottom: 0.6rem;">✅</div>
-        <div style="font-size: 16px; font-weight:600; color:var(--teal); margin-bottom:0.3rem;">報到完成</div>
+        <div style="font-size: 16px; font-weight: 400; color:var(--teal); margin-bottom:0.3rem;">報到完成</div>
         <div style="font-size: 13px; color: var(--ink-soft);">紀錄已送到 Google Sheets</div>
       </div>
       <button class="btn btn-primary" onclick="doAnotherCheckin()">
@@ -686,10 +686,9 @@ input::placeholder {
 
     <!-- 分頁切換 -->
     <div style="display:flex; gap:6px; margin-bottom:1rem; flex-wrap:wrap;">
-      <button id="tab-btn-status" onclick="switchAdminTab('status')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:none; background:var(--teal); color:#fff; font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">學員狀態</button>
-      <button id="tab-btn-log" onclick="switchAdminTab('log')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">報到紀錄</button>
-      <button id="tab-btn-session" onclick="switchAdminTab('session')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">課程設定</button>
-      <button id="tab-btn-progress" onclick="switchAdminTab('progress')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">全勤管理</button>
+      <button id="tab-btn-status" onclick="switchAdminTab('status')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:none; background:var(--teal); color:#fff; font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight: 400; transition:all 0.2s;">學員狀態</button>
+      <button id="tab-btn-log" onclick="switchAdminTab('log')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight: 400; transition:all 0.2s;">報到紀錄</button>
+      <button id="tab-btn-progress" onclick="switchAdminTab('progress')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight: 400; transition:all 0.2s;">全勤管理</button>
     </div>
 
     <!-- 學員狀態 tab -->
@@ -701,31 +700,6 @@ input::placeholder {
     <div id="tab-log" style="display:none;">
       <div id="checkin-log-list" style="display:flex; flex-direction:column; gap:8px;"></div>
       <div id="log-empty" style="text-align:center; padding:2rem; color:var(--ink-soft); font-size:14px; display:none;">尚無報到紀錄</div>
-    </div>
-
-    <!-- 課程設定 tab -->
-    <div id="tab-session" style="display:none;">
-      <div style="font-size:13px; color:var(--ink-soft); margin-bottom:1rem; line-height:1.6;">
-        設定後寫入 Google Sheets「課程設定」分頁，下次開啟首頁時自動讀取顯示。
-      </div>
-      <!-- 現有課程列表 -->
-      <div id="session-list" style="display:flex; flex-direction:column; gap:8px; margin-bottom:1.2rem;"></div>
-      <!-- 新增課程 -->
-      <div style="background:var(--gold-pale); border-radius:10px; padding:1rem; border:1px solid var(--border);">
-        <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:0.8rem;">新增 / 更新課程日期</div>
-        <div style="display:flex; gap:8px; margin-bottom:8px;">
-          <div style="flex:1;">
-            <div style="font-size:11px; color:var(--ink-soft); margin-bottom:4px;">上課日期</div>
-            <input type="date" id="new-session-date" style="width:100%; padding:9px 10px; border-radius:8px; border:1px solid rgba(196,150,74,0.3); font-size:14px; font-family:'Noto Sans TC',sans-serif; background:#fff;">
-          </div>
-          <div style="width:80px;">
-            <div style="font-size:11px; color:var(--ink-soft); margin-bottom:4px;">第幾堂</div>
-            <input type="number" id="new-session-lesson" min="1" max="99" placeholder="5" style="width:100%; padding:9px 10px; border-radius:8px; border:1px solid rgba(196,150,74,0.3); font-size:14px; font-family:'Noto Sans TC',sans-serif; background:#fff; text-align:center;">
-          </div>
-        </div>
-        <button class="btn btn-primary" style="padding:11px; font-size:14px;" id="save-session-btn" onclick="saveSession()">儲存到 Sheets</button>
-        <div id="session-save-msg" class="msg" style="display:none;"></div>
-      </div>
     </div>
 
     <!-- 全勤管理 tab -->
@@ -741,8 +715,8 @@ input::placeholder {
       重新整理（同步 Sheets）
     </button>
 
-    <button class="btn btn-secondary" style="color:#991B1B; border-color:#FECACA;" onclick="clearLog()">
-      清除本機紀錄
+    <button class="btn btn-secondary" style="color:#991B1B; border-color:#FECACA;" onclick="resetStats()">
+      出席統計歸零
     </button>
 
     <button class="btn btn-secondary" onclick="doAdminLogout()">
@@ -766,17 +740,15 @@ let students      = [];
 let gasLog        = [];   // 從 GAS 拉回的紀錄（跨裝置同步）
 let currentStudent = null;
 let chatHistory   = [];
+let currentLesson = null; // { date, lesson } — 目前課次，用來區隔報到紀錄
 
 // ════════════════════════════════════════════
 // 初始化
 // ════════════════════════════════════════════
 async function init() {
-  // 並行拉取學員名單 + 堂次 + 報到紀錄
-  await Promise.allSettled([
-    loadStudents(),
-    updateLessonBanner(),
-    loadGasLog()
-  ]);
+  // 先取得課次資訊，再用課次拉報到紀錄
+  await Promise.allSettled([loadStudents(), updateLessonBanner()]);
+  await loadGasLog();
   updateHomeStats();
 }
 
@@ -790,16 +762,32 @@ async function loadStudents() {
   }
 }
 
-// 從 GAS 拉取本日報到紀錄（跨裝置同步的核心）
+// 從 GAS 拉取「本課次」報到紀錄（日期＋堂次雙重比對）
 async function loadGasLog() {
   try {
-    const resp = await fetch(GAS_URL + '?action=getCheckinLog');
+    // 只用堂次篩選，不用日期，支援提前報到
+    const params = currentLesson
+      ? `&lesson=${encodeURIComponent(currentLesson.lesson)}`
+      : '';
+    const resp = await fetch(GAS_URL + '?action=getCheckinLog' + params);
     const data = await resp.json();
-    if (data.success && data.data) {
-      gasLog = data.data; // [{ studentId, name, dharma, session, reason, time }, ...]
-    }
+    if (data.success && data.data) gasLog = data.data;
   } catch(e) {
-    console.warn('loadGasLog 失敗，統計可能不準確');
+    console.warn('loadGasLog 失敗');
+  }
+}
+
+// ════════════════════════════════════════════
+// 課程設定（直接從 GAS 讀取）
+// ════════════════════════════════════════════
+
+function applySessionToBanner(session) {
+  const banner = document.getElementById('lesson-banner');
+  if (!banner) return;
+  if (session && session.lesson) {
+    banner.textContent = `${session.date} · 第 ${session.lesson} 堂　出席調查`;
+  } else {
+    banner.textContent = '出席調查';
   }
 }
 
@@ -807,31 +795,35 @@ async function updateLessonBanner() {
   try {
     const resp = await fetch(GAS_URL + '?action=getSessionInfo');
     const data = await resp.json();
-    if (!data.success || !data.data) throw new Error();
-
-    const { date, lesson } = data.data; // A欄=日期, B欄=堂次
-    const banner = document.getElementById('lesson-banner');
-    if (banner && lesson) {
-      banner.textContent = `${date} · 第 ${lesson} 堂　出席調查`;
+    if (data.success && data.data) {
+      currentLesson = data.data;
+      applySessionToBanner(data.data);
+    } else {
+      applySessionToBanner(null);
     }
   } catch(e) {
-    const banner = document.getElementById('lesson-banner');
-    if (banner) banner.textContent = '出席調查';
+    applySessionToBanner(null);
   }
 }
 
 // 首頁統計：以 gasLog 為主（跨裝置同步）
 function updateHomeStats() {
-  const total    = 17;
-  const attendIds = new Set(gasLog.filter(l => l.session === '出席').map(l => l.studentId));
-  const leaveIds  = new Set(gasLog.filter(l => l.session === '請假').map(l => l.studentId));
-  const checkedIds = new Set(gasLog.map(l => l.studentId));
-  const pending   = total - checkedIds.size;
+  const total = 17;
+
+  // 每位學員只取最後一筆（更改報到後以最新為準）
+  const latestMap = {};
+  gasLog.forEach(l => { latestMap[l.studentId] = l.session; });
+
+  const sessions  = Object.values(latestMap);
+  const attendCnt = sessions.filter(s => s === '出席').length;
+  const leaveCnt  = sessions.filter(s => s === '請假').length;
+  const pending   = total - Object.keys(latestMap).length;
+
   const el_a = document.getElementById('hs-attend');
   const el_l = document.getElementById('hs-leave');
   const el_p = document.getElementById('hs-pending');
-  if (el_a) el_a.textContent = attendIds.size;
-  if (el_l) el_l.textContent = leaveIds.size;
+  if (el_a) el_a.textContent = attendCnt;
+  if (el_l) el_l.textContent = leaveCnt;
   if (el_p) el_p.textContent = pending < 0 ? 0 : pending;
 }
 
@@ -878,7 +870,7 @@ function handleStudentLogin() {
     const errEl = document.getElementById('home-error');
     errEl.innerHTML =
       `${student.name}${dharmaStr} 已報到（${statusText}　${existing.time}）<br>` +
-      `<button onclick="proceedCheckin('${code}')" style="margin-top:8px;padding:7px 16px;border-radius:7px;border:none;background:var(--teal);color:#fff;font-size:13px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;font-weight:500;">更改報到結果</button>`;
+      `<button onclick="proceedCheckin('${code}')" style="margin-top:8px;padding:7px 16px;border-radius:7px;border:none;background:var(--teal);color:#fff;font-size:13px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;font-weight: 400;">更改報到結果</button>`;
     errEl.classList.add('show');
     document.getElementById('login-code').value = '';
     return;
@@ -918,25 +910,87 @@ function proceedCheckin(code) {
 }
 
 async function loadAIGreeting() {
+  let fb = null;
+
+  // 從 Sheets 快取讀取
   try {
-    const resp = await fetch(GAS_URL +
-      '?action=generateFeedback' +
-      '&student=' + encodeURIComponent(JSON.stringify(currentStudent)) +
-      '&session=問候'
-    );
+    const resp = await fetch(GAS_URL + '?action=getFeedback&studentId=' + encodeURIComponent(currentStudent.id));
     const data = await resp.json();
-    if (!data.success) throw new Error(data.error);
-    const fb = data.data;
-    document.getElementById('greeting-text').innerHTML =
-      `<div style="margin-bottom:0.5rem;">${fb.welcome}</div>` +
-      `<div style="margin-bottom:0.5rem;">${fb.progress}</div>` +
-      `<div>${fb.practice}</div>`;
-  } catch(e) {
-    document.getElementById('greeting-text').innerHTML =
-      `<div>阿彌陀佛 🙏</div><div style="margin-top:0.4rem;">歡迎回來，請選擇今日出席狀態。</div>`;
+    if (data.success && data.data) fb = data.data;
+  } catch(e) {}
+
+  // 快取沒有則用 fallback
+  if (!fb) {
+    const dn = currentStudent.dharma_name ? currentStudent.dharma_name + '師兄' : currentStudent.name;
+    const isSenior = /學長|組長/.test(currentStudent.background || '');
+    const isFull   = currentStudent.progress === '全勤';
+    fb = {
+      welcome:  `阿彌陀佛，${dn}！歡迎您來報到。`,
+      progress: isSenior
+        ? `在百忙之中還願意承擔學長的責任，帶領大家一起走這條修行路，師兄的發心讓人感動。`
+        : isFull
+          ? `師兄持續精進、從不缺席，這份堅持讓人感動，也是大家學習的力量。`
+          : `能在修行的路上與師兄同行，是大家的福報。`,
+      practice: isFull
+        ? `讚嘆師兄至今保持全勤，這太不容易了，請繼續堅持下去喔。🙏`
+        : `每次上課都是修行，都是功德，隨喜師兄的堅持與用心。🙏`,
+      source: 'fallback'
+    };
   }
+
+  // 人工歡迎詞（source=personal）只有 welcome，progress/practice 補 fallback
+  if (fb.source === 'personal') {
+    const dn = currentStudent.dharma_name ? currentStudent.dharma_name + '師兄' : currentStudent.name;
+    const isSenior = /學長|組長/.test(currentStudent.background || '');
+    const isFull   = currentStudent.progress === '全勤';
+    fb.progress = isSenior
+      ? `在百忙之中還願意承擔學長的責任，帶領大家一起走這條修行路，師兄的發心讓人感動。`
+      : isFull
+        ? `師兄持續精進、從不缺席，這份堅持讓人感動，也是大家學習的力量。`
+        : `能在修行的路上與師兄同行，是大家的福報。`;
+    fb.practice = isFull
+      ? `讚嘆師兄至今保持全勤，這太不容易了，請繼續堅持下去喔。🙏`
+      : `每次上課都是修行，都是功德，隨喜師兄的堅持與用心。🙏`;
+  }
+
   document.getElementById('ai-loading').style.display = 'none';
   document.getElementById('ai-greeting-content').style.display = 'block';
+
+  // 三段依序打字機效果
+  const container = document.getElementById('greeting-text');
+  container.innerHTML = '';
+
+  const segments = [
+    { text: fb.welcome,   mb: '0.6rem' },
+    { text: fb.progress,  mb: '0.6rem' },
+    { text: fb.practice,  mb: '0' }
+  ];
+
+  for (const seg of segments) {
+    const div = document.createElement('div');
+    div.style.marginBottom = seg.mb;
+    div.style.minHeight = '1.4em';
+    container.appendChild(div);
+    await typewriter(div, seg.text, 40);
+    await sleep(120); // 段落間短暫停頓
+  }
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function typewriter(el, text, speed) {
+  return new Promise(resolve => {
+    let i = 0;
+    el.textContent = '';
+    const timer = setInterval(() => {
+      // 處理 emoji（多 byte 字元）
+      const cp = text.codePointAt(i);
+      const ch = String.fromCodePoint(cp);
+      el.textContent += ch;
+      i += ch.length;
+      if (i >= text.length) { clearInterval(timer); resolve(); }
+    }, speed);
+  });
 }
 
 function setAiStatus(state, text) {
@@ -963,7 +1017,7 @@ function selectStatus(val) {
     btnAttend.style.background  = 'var(--teal-light)';
     btnAttend.style.borderColor = 'var(--teal)';
     btnAttend.style.color       = 'var(--teal)';
-    btnAttend.style.fontWeight  = '600';
+    btnAttend.style.fontWeight = '400';
     btnAbsent.style.background  = '#fff';
     btnAbsent.style.borderColor = 'var(--border)';
     btnAbsent.style.color       = 'var(--ink)';
@@ -972,7 +1026,7 @@ function selectStatus(val) {
     btnAbsent.style.background  = '#FEF2F2';
     btnAbsent.style.borderColor = '#FECACA';
     btnAbsent.style.color       = '#991B1B';
-    btnAbsent.style.fontWeight  = '600';
+    btnAbsent.style.fontWeight = '400';
     btnAttend.style.background  = '#fff';
     btnAttend.style.borderColor = 'var(--border)';
     btnAttend.style.color       = 'var(--ink)';
@@ -1006,13 +1060,14 @@ async function handleCheckin() {
     // 判斷是否為更改（已有舊紀錄）
     const isUpdate = gasLog.some(l => l.studentId === currentStudent.id);
 
-    // 寫入 GAS（update=1 時 GAS 會覆蓋舊紀錄）
-    await fetch(GAS_URL + '?action=checkin' +
+    // 寫入 GAS（GET 方式，GAS Web App 限制不支援 CORS POST）
+    await fetch(GAS_URL +
+      '?action=checkin' +
       '&studentId=' + encodeURIComponent(currentStudent.id) +
       '&name='      + encodeURIComponent(currentStudent.name) +
       '&dharma='    + encodeURIComponent(currentStudent.dharma_name || '') +
       '&session='   + encodeURIComponent(status) +
-      '&feedback='  + encodeURIComponent(reason) +
+      '&reason='    + encodeURIComponent(reason) +
       '&update='    + (isUpdate ? '1' : '0')
     );
 
@@ -1055,14 +1110,25 @@ function handleAdminLogin() {
 
 // 重新整理：從 GAS 拉最新資料，確保跨裝置同步
 async function refreshAdminData() {
-  // 顯示讀取中狀態
   document.getElementById('admin-date').textContent = '同步中…';
-  await Promise.allSettled([loadStudents(), loadGasLog()]);
+  document.getElementById('student-grid').innerHTML = '<div style="font-size:13px;color:var(--ink-soft);padding:1rem;grid-column:1/-1;">讀取學員資料中…</div>';
+  document.getElementById('checkin-log-list').innerHTML = '';
+
+  try {
+    await Promise.allSettled([loadStudents(), loadGasLog()]);
+  } catch(e) {}
+
+  if (students.length === 0) {
+    document.getElementById('student-grid').innerHTML = '<div style="font-size:13px;color:#991B1B;padding:1rem;grid-column:1/-1;">⚠ 無法讀取學員資料，請確認 GAS 已部署並重新整理</div>';
+    document.getElementById('admin-date').textContent = '讀取失敗';
+    return;
+  }
+
   renderAdmin();
 }
 
 function switchAdminTab(tab) {
-  const tabs = ['status','log','session','progress'];
+  const tabs = ['status','log','progress'];
   tabs.forEach(t => {
     document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
     const btn = document.getElementById('tab-btn-' + t);
@@ -1071,85 +1137,18 @@ function switchAdminTab(tab) {
     btn.style.color      = active ? '#fff' : 'var(--ink)';
     btn.style.border     = active ? 'none' : '1px solid var(--border)';
   });
-  if (tab === 'session')  renderSessionTab();
   if (tab === 'progress') renderProgressGrid();
 }
 
 // ════════════════════════════════════════════
-// 課程設定
+// 出席統計歸零
 // ════════════════════════════════════════════
-let sessionList = []; // 從 GAS 拉回的課程清單
-
-async function renderSessionTab() {
-  const listEl = document.getElementById('session-list');
-  listEl.innerHTML = '<div style="font-size:13px;color:var(--ink-soft);padding:8px 0;">讀取中…</div>';
-  try {
-    const resp = await fetch(GAS_URL + '?action=getAllSessions');
-    const data = await resp.json();
-    sessionList = (data.success && data.data) ? data.data : [];
-  } catch(e) { sessionList = []; }
-
-  if (sessionList.length === 0) {
-    listEl.innerHTML = '<div style="font-size:13px;color:var(--ink-soft);padding:8px 0;">尚無課程設定</div>';
-    return;
-  }
-  listEl.innerHTML = '';
-  sessionList.forEach((s, i) => {
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:9px;padding:10px 12px;';
-    row.innerHTML = `
-      <div style="flex:1;">
-        <div style="font-size:14px;font-weight:500;color:var(--ink);">${s.date}</div>
-        <div style="font-size:12px;color:var(--ink-soft);margin-top:2px;">第 ${s.lesson} 堂</div>
-      </div>
-      <button onclick="deleteSession('${s.date}')" style="padding:5px 10px;border-radius:6px;border:1px solid #FECACA;background:#FEF2F2;color:#991B1B;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;">刪除</button>
-    `;
-    listEl.appendChild(row);
-  });
-}
-
-async function saveSession() {
-  const dateVal   = document.getElementById('new-session-date').value;
-  const lessonVal = document.getElementById('new-session-lesson').value.trim();
-  const msgEl     = document.getElementById('session-save-msg');
-  const btn       = document.getElementById('save-session-btn');
-
-  if (!dateVal) { showTabMsg('session-save-msg', 'error', '請選擇日期'); return; }
-  if (!lessonVal || isNaN(lessonVal)) { showTabMsg('session-save-msg', 'error', '請填入堂數（數字）'); return; }
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>';
-
-  // 日期格式轉為 yyyy/MM/dd
-  const d = new Date(dateVal);
-  const dateStr = `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-
-  try {
-    const resp = await fetch(GAS_URL +
-      '?action=saveSession' +
-      '&date='   + encodeURIComponent(dateStr) +
-      '&lesson=' + encodeURIComponent(lessonVal)
-    );
-    const data = await resp.json();
-    if (!data.success) throw new Error(data.error);
-    showTabMsg('session-save-msg', 'success', `✓ 已儲存：${dateStr} 第 ${lessonVal} 堂`);
-    document.getElementById('new-session-date').value   = '';
-    document.getElementById('new-session-lesson').value = '';
-    renderSessionTab(); // 重新整理列表
-  } catch(e) {
-    showTabMsg('session-save-msg', 'error', '儲存失敗，請確認 GAS 已部署');
-  }
-  btn.disabled = false;
-  btn.textContent = '儲存到 Sheets';
-}
-
-async function deleteSession(date) {
-  if (!confirm(`確定刪除 ${date} 的課程設定？`)) return;
-  try {
-    const resp = await fetch(GAS_URL + '?action=deleteSession&date=' + encodeURIComponent(date));
-    const data = await resp.json();
-    if (data.success) renderSessionTab();
-  } catch(e) {}
+function resetStats() {
+  if (!confirm('確定要將首頁出席統計歸零？\n（Sheets 紀錄不受影響，只清除目前畫面的統計）')) return;
+  gasLog = [];
+  updateHomeStats();
+  renderAdmin();
+  showTabMsg('progress-save-msg', 'success', '✓ 出席統計已歸零');
 }
 
 // ════════════════════════════════════════════
@@ -1168,7 +1167,7 @@ function renderProgressGrid() {
     div.innerHTML = `
       <div class="student-name">${s.name}</div>
       ${dharmaStr ? `<div class="student-dharma">${dharmaStr}</div>` : ''}
-      <div class="student-status" style="margin-top:6px; font-size:12px; font-weight:600; color:${isFull ? 'var(--teal)' : '#9ca3af'};">
+      <div class="student-status" style="margin-top:6px; font-size:12px; font-weight: 400; color:${isFull ? 'var(--teal)' : '#9ca3af'};">
         ${isFull ? '✓ 全勤' : '— 一般'}
       </div>
     `;
@@ -1218,15 +1217,19 @@ function renderAdmin() {
     weekday: 'short', hour: '2-digit', minute: '2-digit'
   });
 
-  const attendIds  = new Set(gasLog.filter(l => l.session === '出席').map(l => l.studentId));
-  const leaveIds   = new Set(gasLog.filter(l => l.session === '請假').map(l => l.studentId));
-  const checkedIds = new Set(gasLog.map(l => l.studentId));
-  const total = students.length;
-  const rate  = total > 0 ? Math.round(attendIds.size / total * 100) : 0;
+  // 每位學員只取最後一筆（更改報到後以最新為準）
+  const latestMap = {};
+  gasLog.forEach(l => { latestMap[l.studentId] = l.session; });
+  const sessions   = Object.values(latestMap);
+  const attendCnt  = sessions.filter(s => s === '出席').length;
+  const leaveCnt   = sessions.filter(s => s === '請假').length;
+  const total      = students.length;
+  const pending    = total - Object.keys(latestMap).length;
+  const rate       = total > 0 ? Math.round(attendCnt / total * 100) : 0;
 
   document.getElementById('stat-total').textContent     = total;
-  document.getElementById('stat-checkedin').textContent = attendIds.size;
-  document.getElementById('stat-pending').textContent   = leaveIds.size + (total - checkedIds.size);
+  document.getElementById('stat-checkedin').textContent = attendCnt;
+  document.getElementById('stat-pending').textContent   = leaveCnt + (pending < 0 ? 0 : pending);
   document.getElementById('stat-rate').textContent      = rate + '%';
 
   // 學員狀態格
@@ -1251,11 +1254,15 @@ function renderAdmin() {
     grid.appendChild(div);
   });
 
-  // 報到紀錄列表（倒序）
+  // 報到紀錄列表（每人只顯示最新一筆，倒序）
   const logList  = document.getElementById('checkin-log-list');
   const logEmpty = document.getElementById('log-empty');
   logList.innerHTML = '';
-  const reversed = [...gasLog].reverse();
+
+  // 每人取最後一筆
+  const latestLogs = {};
+  gasLog.forEach(l => { latestLogs[l.studentId] = l; });
+  const reversed = Object.values(latestLogs).reverse();
   if (reversed.length === 0) {
     logEmpty.style.display = 'block';
   } else {
@@ -1266,12 +1273,12 @@ function renderAdmin() {
       item.style.cssText = `background:${isAttend ? 'rgba(26,107,90,0.06)' : '#FEF2F2'};border:1px solid ${isAttend ? 'rgba(26,107,90,0.2)' : '#FECACA'};border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;`;
       const dharmaStr = l.dharma ? l.dharma + '師兄' : '';
       item.innerHTML = `
-        <div style="width:36px;height:36px;border-radius:50%;background:${isAttend ? 'var(--teal-light)' : '#FEE2E2'};color:${isAttend ? 'var(--teal)' : '#991B1B'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;">
+        <div style="width:36px;height:36px;border-radius:50%;background:${isAttend ? 'var(--teal-light)' : '#FEE2E2'};color:${isAttend ? 'var(--teal)' : '#991B1B'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight: 400;flex-shrink:0;">
           ${l.name ? l.name.slice(-1) : '？'}
         </div>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:14px;font-weight:500;color:var(--ink);">${l.name}${dharmaStr ? `<span style="font-size:11px;color:var(--ink-soft);font-weight:400;margin-left:6px;">${dharmaStr}</span>` : ''}</div>
-          <div style="font-size:11px;color:var(--ink-soft);margin-top:2px;">${l.time}　<span style="color:${isAttend ? 'var(--teal)' : '#991B1B'};font-weight:500;">${l.session}</span></div>
+          <div style="font-size:14px;font-weight: 400;color:var(--ink);">${l.name}${dharmaStr ? `<span style="font-size:11px;color:var(--ink-soft);font-weight:400;margin-left:6px;">${dharmaStr}</span>` : ''}</div>
+          <div style="font-size:11px;color:var(--ink-soft);margin-top:2px;">${l.time}　<span style="color:${isAttend ? 'var(--teal)' : '#991B1B'};font-weight: 400;">${l.session}</span></div>
           ${l.reason ? `<div style="font-size:12px;color:var(--ink-soft);margin-top:5px;background:rgba(0,0,0,0.04);border-radius:6px;padding:6px 8px;line-height:1.6;">事由：${l.reason}</div>` : ''}
         </div>
       `;
