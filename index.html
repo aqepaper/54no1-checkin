@@ -53,7 +53,7 @@ body::before {
 /* ─── 標題區 ─── */
 .header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .logo {
@@ -513,33 +513,36 @@ input::placeholder {
 <!-- ═══════════════════════════════════════ -->
 <div id="screen-home" class="screen active">
   <div class="header">
-    <div class="logo" style="font-size:56px; margin-bottom:0.3rem;">🍀</div>
-    <h1 class="title">54期男1組</h1>
-    <div id="lesson-banner" style="margin-top:0.6rem; background:rgba(26,107,90,0.1); border-radius:12px; padding:10px 20px; font-size:15px; font-weight: 400; color:var(--teal); letter-spacing:0.05em; min-height:40px;"></div>
+    <!-- 葉子在左，標題置中 -->
+    <div style="position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:0.4rem;">
+      <span style="position:absolute; left:0; font-size:36px; line-height:1;">🍀</span>
+      <h1 class="title" style="margin-bottom:0;">54期男1組</h1>
+    </div>
+    <div id="lesson-banner" style="margin-top:0.4rem; background:rgba(26,107,90,0.1); border-radius:12px; padding:8px 20px; font-size:15px; font-weight:400; color:var(--teal); letter-spacing:0.05em; min-height:36px;"></div>
   </div>
 
-  <!-- 統計列 -->
-  <div id="home-stats" style="display:flex; gap:10px; width:100%; margin-bottom:1rem;">
-    <div style="flex:1; background:rgba(26,107,90,0.1); border-radius:10px; padding:12px 8px; text-align:center;">
-      <div id="hs-attend" style="font-size:26px; font-weight: 400; color:var(--teal);">--</div>
-      <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">出席</div>
+  <!-- 統計列：加大字體，友善長輩 -->
+  <div id="home-stats" style="display:flex; gap:10px; width:100%; margin-bottom:0.6rem;">
+    <div style="flex:1; background:rgba(26,107,90,0.1); border-radius:10px; padding:14px 8px; text-align:center;">
+      <div id="hs-attend" style="font-size:38px; font-weight:400; color:var(--teal); line-height:1.1;">--</div>
+      <div style="font-size:16px; color:var(--teal); margin-top:4px;">出席</div>
     </div>
-    <div style="flex:1; background:rgba(196,150,74,0.12); border-radius:10px; padding:12px 8px; text-align:center;">
-      <div id="hs-leave" style="font-size:26px; font-weight: 400; color:var(--gold);">--</div>
-      <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">請假</div>
+    <div style="flex:1; background:rgba(196,150,74,0.12); border-radius:10px; padding:14px 8px; text-align:center;">
+      <div id="hs-leave" style="font-size:38px; font-weight:400; color:var(--gold); line-height:1.1;">--</div>
+      <div style="font-size:16px; color:var(--gold); margin-top:4px;">請假</div>
     </div>
-    <div style="flex:1; background:rgba(156,163,175,0.15); border-radius:10px; padding:12px 8px; text-align:center;">
-      <div id="hs-pending" style="font-size:26px; font-weight: 400; color:#9ca3af;">--</div>
-      <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">未回報</div>
+    <div style="flex:1; background:rgba(156,163,175,0.15); border-radius:10px; padding:14px 8px; text-align:center;">
+      <div id="hs-pending" style="font-size:38px; font-weight:400; color:#9ca3af; line-height:1.1;">--</div>
+      <div style="font-size:16px; color:var(--ink-soft); margin-top:4px;">未回報</div>
     </div>
   </div>
-  <div style="font-size:11px; color:var(--ink-soft); margin-bottom:1rem; text-align:center;">共 17 人</div>
+  <div style="font-size:12px; color:var(--ink-soft); margin-bottom:0.8rem; text-align:center;">共 17 人</div>
 
   <div class="card">
     <div class="card-title">報到系統</div>
     
     <div class="field">
-      <label style="font-size:14px; color:var(--ink); font-weight: 400; letter-spacing:0.06em;">登入碼：手機後四碼</label>
+      <label style="font-size:15px; color:var(--ink); font-weight:400; letter-spacing:0.06em; text-align:center; display:block;">登入碼：手機後四碼</label>
       <input type="tel" id="login-code" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="font-size:24px; letter-spacing:0.3em; text-align:center;" onkeydown="if(event.key==='Enter') handleStudentLogin()">
     </div>
 
