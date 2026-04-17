@@ -9,63 +9,56 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --gold: #C4964A;
-  --gold-pale: #F9F3E8;
-  --ink: #1C1410;
-  --ink-soft: #8A7A6E;
-  --paper: #FBF7F0;
-  --paper-dark: #F0E8D8;
-  --teal: #1A6B5A;
-  --teal-light: #E0F0EC;
-  --border: rgba(196,150,74,0.22);
-  --radius: 12px;
-  --shadow: 0 2px 12px rgba(28,20,16,0.06);
+  --gold: #B8860B;
+  --gold-light: #D4AF37;
+  --gold-pale: #FDF6E3;
+  --ink: #2C2927;
+  --ink-soft: #7A6E65;
+  --paper: #FDFBF7;
+  --paper-dark: #F5EFE2;
+  --teal: #2D5D4F;
+  --teal-light: #F0F7F4;
+  --border: rgba(184,134,11,0.18);
+  --radius: 16px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.05);
 }
 
 body {
   font-family: 'Noto Sans TC', sans-serif;
   background: var(--paper);
+  background-image: radial-gradient(#e5e0d8 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
   color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
   max-width: 480px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* 桌機底色填滿 */
-html {
-  background: #e8e0d4;
-}
+html { background: #ddd8cf; }
 
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 15% 10%, rgba(196,150,74,0.06) 0%, transparent 55%),
-              radial-gradient(ellipse 50% 70% at 85% 85%, rgba(26,107,90,0.04) 0%, transparent 50%);
+  background: radial-gradient(ellipse 80% 60% at 15% 10%, rgba(184,134,11,0.05) 0%, transparent 55%),
+              radial-gradient(ellipse 50% 70% at 85% 85%, rgba(45,93,79,0.04) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
 
-.screen { display: none; min-height: 100vh; position: relative; z-index: 1; padding: 2.5rem 1.2rem; }
+.screen { display: none; min-height: 100vh; position: relative; z-index: 1; padding: 2rem 1.2rem; }
 .screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
 /* ─── 標題區 ─── */
-.header {
-  text-align: center;
-  margin-bottom: 1rem;
-}
+.header { text-align: center; margin-bottom: 1rem; }
 
 .logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   margin: 0 auto 0.6rem;
-  font-size: 52px;
-  line-height: 1;
-  background: none;
-  border: none;
-  box-shadow: none;
+  font-size: 52px; line-height: 1;
+  background: none; border: none; box-shadow: none;
   width: auto; height: auto;
 }
 
@@ -78,182 +71,137 @@ body::before {
   margin-bottom: 4px;
 }
 
-.subtitle {
-  font-size: 12px;
-  color: var(--ink-soft);
-  letter-spacing: 0.06em;
-}
+.subtitle { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.06em; }
 
 /* ─── 卡片 ─── */
 .card {
-  background: rgba(255,255,255,0.92);
-  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(184,134,11,0.15);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   width: 100%;
   max-width: 100%;
-  padding: 1.8rem 1.4rem;
+  padding: 2rem 1.5rem;
+  transition: transform 0.3s ease;
 }
 
 .card-title {
   font-family: 'Noto Serif TC', serif;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 16px; font-weight: 400;
   color: var(--ink);
   margin-bottom: 1.3rem;
-  text-align: center;
-  letter-spacing: 0.05em;
+  text-align: center; letter-spacing: 0.05em;
 }
 
 /* ─── 表單 ─── */
-.field {
-  margin-bottom: 1.2rem;
-}
-
-.field:last-child {
-  margin-bottom: 0;
-}
+.field { margin-bottom: 1.2rem; }
+.field:last-child { margin-bottom: 0; }
 
 label {
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--ink-mid);
-  margin-bottom: 6px;
-  letter-spacing: 0.05em;
+  display: block; font-size: 12px; font-weight: 400;
+  color: var(--ink-soft); margin-bottom: 6px; letter-spacing: 0.05em;
 }
 
 input, select, textarea {
   width: 100%;
   padding: 11px 13px;
-  border: 1px solid rgba(196,150,74,0.3);
-  border-radius: 8px;
+  border: 2px solid var(--paper-dark);
+  border-radius: 12px;
   font-size: 14px;
   font-family: 'Noto Sans TC', sans-serif;
   color: var(--ink);
-  background: rgba(251,247,240,0.6);
+  background: #fff;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   -webkit-appearance: none;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+input[type=tel], input[type=password] {
+  height: 64px;
+  font-size: 28px;
+  border-radius: 12px;
 }
 
 input:focus, select:focus, textarea:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(196,150,74,0.1);
+  box-shadow: 0 0 0 4px rgba(184,134,11,0.1);
   background: #fff;
 }
 
-input::placeholder {
-  color: var(--ink-soft);
-  opacity: 0.6;
-}
+input::placeholder { color: var(--ink-soft); opacity: 0.5; }
 
 /* ─── 按鈕 ─── */
 .btn {
-  width: 100%;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 17px;
-  font-weight: 400;
+  width: 100%; padding: 15px 20px;
+  border: none; border-radius: 30px;
+  font-size: 18px; font-weight: 400;
   font-family: 'Noto Sans TC', sans-serif;
-  cursor: pointer;
-  transition: all 0.2s;
-  letter-spacing: 0.04em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  cursor: pointer; transition: all 0.2s;
+  letter-spacing: 2px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #C4964A 0%, #A07835 100%);
+  background: linear-gradient(135deg, var(--teal) 0%, #1e4238 100%);
   color: #fff;
-  box-shadow: 0 2px 10px rgba(196,150,74,0.28);
+  box-shadow: 0 4px 15px rgba(45,93,79,0.3);
+  height: 60px;
 }
 
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(196,150,74,0.36);
-}
-
-.btn-primary:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,93,79,0.38); }
+.btn-primary:active:not(:disabled) { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .btn-secondary {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--ink);
   margin-top: 0.8rem;
+  border-radius: 30px;
+  letter-spacing: 1px;
 }
 
-.btn-secondary:hover {
-  background: var(--gold-pale);
-  border-color: rgba(196,150,74,0.4);
-}
+.btn-secondary:hover { background: var(--gold-pale); border-color: rgba(184,134,11,0.35); }
 
 .btn-teal {
-  background: linear-gradient(135deg, #1A6B5A 0%, #145248 100%);
+  background: linear-gradient(135deg, var(--teal) 0%, #1e4238 100%);
   color: #fff;
-  box-shadow: 0 2px 10px rgba(26,107,90,0.24);
+  box-shadow: 0 4px 15px rgba(45,93,79,0.28);
   margin-top: 1rem;
 }
 
-.btn-teal:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(26,107,90,0.32);
+.btn-teal:hover:not(:disabled) { transform: translateY(-1px); }
+
+/* 出席／請假按鈕 */
+#btn-attend, #btn-absent {
+  height: 80px;
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-width: 2px;
+  border-radius: 14px;
 }
 
 /* ─── 訊息 ─── */
-.msg {
-  padding: 12px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-top: 1rem;
-  display: none;
-}
-
+.msg { padding: 12px 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; margin-top: 1rem; display: none; }
 .msg.show { display: block; }
-
-.msg-error {
-  background: #FEF2F2;
-  border: 1px solid #FECACA;
-  color: #991B1B;
-}
-
-.msg-success {
-  background: #F0FDF4;
-  border: 1px solid #BBFBDF;
-  color: #166534;
-}
-
-.msg-info {
-  background: #EFF6FF;
-  border: 1px solid #BFDBFE;
-  color: #1E40AF;
-}
+.msg-error { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
+.msg-success { background: #F0FDF4; border: 1px solid #BBFBDF; color: #166534; }
+.msg-info { background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF; }
 
 /* ─── 加載動畫 ─── */
 .spinner {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
+  display: inline-block; width: 12px; height: 12px;
   border: 2px solid rgba(255,255,255,0.3);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ─── AI 狀態列 ─── */
 .ai-status {
@@ -460,9 +408,9 @@ input::placeholder {
 
 .student-card {
   background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 0.8rem;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 1rem 0.5rem;
   text-align: center;
   cursor: default;
   transition: all 0.2s;
@@ -470,7 +418,7 @@ input::placeholder {
 
 .student-card.checked-in {
   background: var(--teal-light);
-  border-color: rgba(26,107,90,0.3);
+  border-color: var(--teal);
 }
 
 .student-card.leave {
@@ -542,8 +490,8 @@ input::placeholder {
     <div class="card-title">報到系統</div>
     
     <div class="field">
-      <label style="font-size:15px; color:var(--ink); font-weight:400; letter-spacing:0.06em; text-align:center; display:block;">登入碼：手機後四碼</label>
-      <input type="tel" id="login-code" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="font-size:24px; letter-spacing:0.3em; text-align:center;" onkeydown="if(event.key==='Enter') handleStudentLogin()">
+      <div style="font-size:16px; color:var(--ink-soft); text-align:center; margin-bottom:10px; letter-spacing:0.05em;">師兄，請輸入手機後四碼。</div>
+      <input type="tel" id="login-code" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="text-align:center; letter-spacing:0.3em;" onkeydown="if(event.key==='Enter') handleStudentLogin()">
     </div>
 
     <button class="btn btn-primary" onclick="handleStudentLogin()">
@@ -581,8 +529,8 @@ input::placeholder {
       </div>
       <!-- 問候內容 -->
       <div id="ai-greeting-content" style="display:none;">
-        <div style="background: var(--teal-light); border-radius: 12px; padding: 1.2rem; font-size: 15px; line-height: 1.8; color: var(--teal); margin-bottom: 1.2rem;">
-          <div style="font-size:20px; margin-bottom:0.5rem;">🙏</div>
+        <div style="background: linear-gradient(to right, #fdfbf7, #f0f7f4); border-left: 5px solid var(--teal); border-radius: 0 12px 12px 0; box-shadow: 4px 4px 15px rgba(0,0,0,0.03); padding: 1.5rem; font-size: 15px; line-height: 1.9; color: var(--teal); margin-bottom: 1.4rem;">
+          <div style="font-size:20px; margin-bottom:0.6rem;">🙏</div>
           <div id="greeting-text"></div>
         </div>
         <!-- 步驟二：選擇出席狀態 -->
@@ -619,9 +567,6 @@ input::placeholder {
         <div style="font-size: 16px; font-weight: 400; color:var(--teal); margin-bottom:0.3rem;">報到完成</div>
         <div style="font-size: 13px; color: var(--ink-soft);">紀錄已送到 Google Sheets</div>
       </div>
-      <button class="btn btn-primary" onclick="doAnotherCheckin()">
-        下一位報到
-      </button>
       <button class="btn btn-secondary" onclick="showScreen('screen-home')">
         回首頁
       </button>
