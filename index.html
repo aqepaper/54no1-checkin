@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>54期男1組 · 報到系統</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C4964A;
+  --gold-pale: #F9F3E8;
+  --ink: #1C1410;
+  --ink-soft: #8A7A6E;
+  --paper: #FBF7F0;
+  --paper-dark: #F0E8D8;
+  --teal: #1A6B5A;
+  --teal-light: #E0F0EC;
+  --border: rgba(196,150,74,0.22);
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(28,20,16,0.06);
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* 桌機底色填滿 */
+html {
+  background: #e8e0d4;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 15% 10%, rgba(196,150,74,0.06) 0%, transparent 55%),
+              radial-gradient(ellipse 50% 70% at 85% 85%, rgba(26,107,90,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.screen { display: none; min-height: 100vh; position: relative; z-index: 1; padding: 2.5rem 1.2rem; }
+.screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* ─── 標題區 ─── */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.6rem;
+  font-size: 52px;
+  line-height: 1;
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: auto; height: auto;
+}
+
+.title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+}
+
+/* ─── 卡片 ─── */
+.card {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 100%;
+  padding: 1.8rem 1.4rem;
+}
+
+.card-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.3rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+/* ─── 表單 ─── */
+.field {
+  margin-bottom: 1.2rem;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-mid);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid rgba(196,150,74,0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--ink);
+  background: rgba(251,247,240,0.6);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(196,150,74,0.1);
+  background: #fff;
+}
+
+input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.6;
+}
+
+/* ─── 按鈕 ─── */
+.btn {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: 'Noto Sans TC', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #C4964A 0%, #A07835 100%);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(196,150,74,0.28);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(196,150,74,0.36);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  margin-top: 0.8rem;
+}
+
+.btn-secondary:hover {
+  background: var(--gold-pale);
+  border-color: rgba(196,150,74,0.4);
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, #1A6B5A 0%, #145248 100%);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(26,107,90,0.24);
+  margin-top: 1rem;
+}
+
+.btn-teal:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26,107,90,0.32);
+}
+
+/* ─── 訊息 ─── */
+.msg {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 1rem;
+  display: none;
+}
+
+.msg.show { display: block; }
+
+.msg-error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+}
+
+.msg-success {
+  background: #F0FDF4;
+  border: 1px solid #BBFBDF;
+  color: #166534;
+}
+
+.msg-info {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1E40AF;
+}
+
+/* ─── 加載動畫 ─── */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── AI 狀態列 ─── */
+.ai-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 0.8rem;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ai-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ca3af;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.ai-dot.connecting {
+  background: var(--gold);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.ai-dot.connected {
+  background: #22c55e;
+}
+
+.ai-dot.error {
+  background: #ef4444;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* ─── 聊天介面 ─── */
+.chat-container {
+  width: 100%;
+  max-width: 380px;
+  height: 420px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.chat-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.chat-msg.user {
+  justify-content: flex-end;
+}
+
+.chat-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.chat-msg.user .chat-avatar {
+  background: var(--gold-pale);
+  color: var(--ink);
+  order: 2;
+}
+
+.chat-msg.ai .chat-avatar {
+  background: var(--teal-light);
+  color: var(--teal);
+}
+
+.chat-bubble {
+  max-width: 220px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.chat-msg.user .chat-bubble {
+  background: linear-gradient(135deg, #C4964A 0%, #A07835 100%);
+  color: #fff;
+  border-radius: 10px 4px 10px 10px;
+  order: 1;
+}
+
+.chat-msg.ai .chat-bubble {
+  background: var(--teal-light);
+  color: var(--teal);
+  border-radius: 4px 10px 10px 10px;
+}
+
+.chat-input-area {
+  border-top: 1px solid var(--border);
+  padding: 1rem;
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid rgba(196,150,74,0.3);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: 'Noto Sans TC', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+  border-color: var(--gold);
+}
+
+.chat-send {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #C4964A 0%, #A07835 100%);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.chat-send:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.chat-send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── 管理後台 ─── */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-box {
+  background: var(--gold-pale);
+  border: 1px solid rgba(196,150,74,0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.student-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem;
+  text-align: center;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.student-card.checked-in {
+  background: var(--teal-light);
+  border-color: rgba(26,107,90,0.3);
+}
+
+.student-card.leave {
+  background: #FEF2F2;
+  border-color: #FECACA;
+}
+
+.student-card.leave .student-status {
+  color: #991B1B;
+}
+
+.student-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.student-dharma {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.student-status {
+  font-size: 11px;
+  color: var(--teal);
+  font-weight: 500;
+}
+
+.student-card:not(.checked-in) .student-status {
+  color: #9ca3af;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 首頁 -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-home" class="screen active">
+  <div class="header">
+    <div class="logo" style="font-size:56px; margin-bottom:0.3rem;">🍀</div>
+    <h1 class="title">54期男1組</h1>
+    <div id="lesson-banner" style="margin-top:0.6rem; background:rgba(26,107,90,0.1); border-radius:12px; padding:10px 20px; font-size:15px; font-weight:600; color:var(--teal); letter-spacing:0.05em; min-height:40px;"></div>
+  </div>
+
+  <!-- 統計列 -->
+  <div id="home-stats" style="display:flex; gap:10px; width:100%; margin-bottom:1rem;">
+    <div style="flex:1; background:rgba(26,107,90,0.1); border-radius:10px; padding:12px 8px; text-align:center;">
+      <div id="hs-attend" style="font-size:26px; font-weight:700; color:var(--teal);">--</div>
+      <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">出席</div>
+    </div>
+    <div style="flex:1; background:rgba(196,150,74,0.12); border-radius:10px; padding:12px 8px; text-align:center;">
+      <div id="hs-leave" style="font-size:26px; font-weight:700; color:var(--gold);">--</div>
+      <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">請假</div>
+    </div>
+    <div style="flex:1; background:rgba(156,163,175,0.15); border-radius:10px; padding:12px 8px; text-align:center;">
+      <div id="hs-pending" style="font-size:26px; font-weight:700; color:#9ca3af;">--</div>
+      <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">未回報</div>
+    </div>
+  </div>
+  <div style="font-size:11px; color:var(--ink-soft); margin-bottom:1rem; text-align:center;">共 17 人</div>
+
+  <div class="card">
+    <div class="card-title">報到系統</div>
+    
+    <div class="field">
+      <label style="font-size:14px; color:var(--ink); font-weight:600; letter-spacing:0.06em;">登入碼：手機後四碼</label>
+      <input type="tel" id="login-code" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="font-size:24px; letter-spacing:0.3em; text-align:center;" onkeydown="if(event.key==='Enter') handleStudentLogin()">
+    </div>
+
+    <button class="btn btn-primary" onclick="handleStudentLogin()">
+      登入
+    </button>
+
+    <div style="text-align:center; margin-top: 1.2rem;">
+      <a href="#" onclick="showScreen('screen-admin-login'); return false;" style="font-size:12px; color: var(--ink-soft); text-decoration: none; letter-spacing:0.05em;">學長專區</a>
+    </div>
+
+    <div id="home-error" class="msg msg-error"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 學員報到 -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-checkin" class="screen">
+  <div class="header">
+    <div class="logo">🍀</div>
+    <div id="student-display" style="font-size: clamp(24px, 6vw, 32px); font-family: 'Noto Serif TC', serif; font-weight: 600; color: var(--ink); letter-spacing: 0.1em; margin-top: 0.2rem;"></div>
+  </div>
+
+  <div class="card">
+
+    <!-- 步驟一：AI 問候 -->
+    <div id="ai-greeting-box" style="display:block;">
+      <!-- 載入中 -->
+      <div id="ai-loading" style="text-align:center; padding: 1.5rem 0;">
+        <div style="font-size:36px; margin-bottom:0.8rem;">🍀</div>
+        <div class="ai-status" style="margin: 0 auto;">
+          <div class="ai-dot connecting" id="ai-dot"></div>
+          <span id="ai-status-text">課務小秘書回應中</span>
+        </div>
+      </div>
+      <!-- 問候內容 -->
+      <div id="ai-greeting-content" style="display:none;">
+        <div style="background: var(--teal-light); border-radius: 12px; padding: 1.2rem; font-size: 15px; line-height: 1.8; color: var(--teal); margin-bottom: 1.2rem;">
+          <div style="font-size:20px; margin-bottom:0.5rem;">🙏</div>
+          <div id="greeting-text"></div>
+        </div>
+        <!-- 步驟二：選擇出席狀態 -->
+        <div style="font-size:14px; font-weight:600; color:var(--ink); margin-bottom:0.8rem; letter-spacing:0.05em;">請選擇今日出席狀態</div>
+        <div style="display: flex; gap: 12px; margin-bottom:1rem;">
+          <button type="button" id="btn-attend" onclick="selectStatus('出席')" style="flex:1; padding: 18px 8px; border-radius: 12px; border: 2px solid var(--border); background: #fff; font-size: 17px; font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all 0.2s; color: var(--ink); font-weight:500;">
+            出席
+          </button>
+          <button type="button" id="btn-absent" onclick="selectStatus('請假')" style="flex:1; padding: 18px 8px; border-radius: 12px; border: 2px solid var(--border); background: #fff; font-size: 17px; font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: all 0.2s; color: var(--ink); font-weight:500;">
+            請假
+          </button>
+        </div>
+        <input type="hidden" id="session-select" value="">
+
+        <div class="field" id="absence-reason-field" style="display:none;">
+          <label>請假事由</label>
+          <textarea id="absence-reason" rows="3" placeholder="請填寫請假事由"></textarea>
+        </div>
+
+        <button class="btn btn-primary" onclick="handleCheckin()">
+          確認送出
+        </button>
+        <button class="btn btn-secondary" onclick="showScreen('screen-home')">
+          回首頁
+        </button>
+        <div id="checkin-error" class="msg msg-error"></div>
+      </div>
+    </div>
+
+    <!-- 步驟三：送出成功 -->
+    <div id="checkin-result" style="display: none;">
+      <div style="text-align: center; padding: 1rem 0 1.5rem;">
+        <div style="font-size: 52px; margin-bottom: 0.6rem;">✅</div>
+        <div style="font-size: 16px; font-weight:600; color:var(--teal); margin-bottom:0.3rem;">報到完成</div>
+        <div style="font-size: 13px; color: var(--ink-soft);">紀錄已送到 Google Sheets</div>
+      </div>
+      <button class="btn btn-primary" onclick="doAnotherCheckin()">
+        下一位報到
+      </button>
+      <button class="btn btn-secondary" onclick="showScreen('screen-home')">
+        回首頁
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 學長登入 -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-admin-login" class="screen">
+  <div class="header">
+    <div class="logo">👑</div>
+    <h1 class="title">學長專區</h1>
+    <p class="subtitle">進入管理面板</p>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label>請輸入密碼</label>
+      <input type="password" id="admin-pwd" placeholder="輸入密碼" onkeydown="if(event.key==='Enter') handleAdminLogin()">
+    </div>
+
+    <button class="btn btn-primary" onclick="handleAdminLogin()">
+      進入後台
+    </button>
+
+    <button class="btn btn-secondary" onclick="showScreen('screen-home')">
+      取消
+    </button>
+
+    <div id="admin-login-error" class="msg msg-error"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 管理面板 -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-admin" class="screen">
+  <div class="header">
+    <h1 class="title">報到統計</h1>
+    <p class="subtitle" id="admin-date">加載中...</p>
+  </div>
+
+  <div class="card">
+    <div class="admin-stats">
+      <div class="stat-box">
+        <div class="stat-number" id="stat-total">--</div>
+        <div class="stat-label">總人數</div>
+      </div>
+      <div class="stat-box" style="background:rgba(26,107,90,0.1); border-color:rgba(26,107,90,0.2);">
+        <div class="stat-number" id="stat-checkedin" style="color:var(--teal);">--</div>
+        <div class="stat-label">出席</div>
+      </div>
+      <div class="stat-box" style="background:#FEF2F2; border-color:#FECACA;">
+        <div class="stat-number" id="stat-pending" style="color:#991B1B;">--</div>
+        <div class="stat-label">請假／未回報</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="stat-rate">--%</div>
+        <div class="stat-label">出席率</div>
+      </div>
+    </div>
+
+    <!-- 分頁切換 -->
+    <div style="display:flex; gap:6px; margin-bottom:1rem; flex-wrap:wrap;">
+      <button id="tab-btn-status" onclick="switchAdminTab('status')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:none; background:var(--teal); color:#fff; font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">學員狀態</button>
+      <button id="tab-btn-log" onclick="switchAdminTab('log')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">報到紀錄</button>
+      <button id="tab-btn-session" onclick="switchAdminTab('session')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">課程設定</button>
+      <button id="tab-btn-progress" onclick="switchAdminTab('progress')" style="flex:1; min-width:70px; padding:9px 0; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--ink); font-size:12px; font-family:'Noto Sans TC',sans-serif; cursor:pointer; font-weight:500; transition:all 0.2s;">全勤管理</button>
+    </div>
+
+    <!-- 學員狀態 tab -->
+    <div id="tab-status">
+      <div id="student-grid" class="student-grid"></div>
+    </div>
+
+    <!-- 報到紀錄 tab -->
+    <div id="tab-log" style="display:none;">
+      <div id="checkin-log-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+      <div id="log-empty" style="text-align:center; padding:2rem; color:var(--ink-soft); font-size:14px; display:none;">尚無報到紀錄</div>
+    </div>
+
+    <!-- 課程設定 tab -->
+    <div id="tab-session" style="display:none;">
+      <div style="font-size:13px; color:var(--ink-soft); margin-bottom:1rem; line-height:1.6;">
+        設定後寫入 Google Sheets「課程設定」分頁，下次開啟首頁時自動讀取顯示。
+      </div>
+      <!-- 現有課程列表 -->
+      <div id="session-list" style="display:flex; flex-direction:column; gap:8px; margin-bottom:1.2rem;"></div>
+      <!-- 新增課程 -->
+      <div style="background:var(--gold-pale); border-radius:10px; padding:1rem; border:1px solid var(--border);">
+        <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:0.8rem;">新增 / 更新課程日期</div>
+        <div style="display:flex; gap:8px; margin-bottom:8px;">
+          <div style="flex:1;">
+            <div style="font-size:11px; color:var(--ink-soft); margin-bottom:4px;">上課日期</div>
+            <input type="date" id="new-session-date" style="width:100%; padding:9px 10px; border-radius:8px; border:1px solid rgba(196,150,74,0.3); font-size:14px; font-family:'Noto Sans TC',sans-serif; background:#fff;">
+          </div>
+          <div style="width:80px;">
+            <div style="font-size:11px; color:var(--ink-soft); margin-bottom:4px;">第幾堂</div>
+            <input type="number" id="new-session-lesson" min="1" max="99" placeholder="5" style="width:100%; padding:9px 10px; border-radius:8px; border:1px solid rgba(196,150,74,0.3); font-size:14px; font-family:'Noto Sans TC',sans-serif; background:#fff; text-align:center;">
+          </div>
+        </div>
+        <button class="btn btn-primary" style="padding:11px; font-size:14px;" id="save-session-btn" onclick="saveSession()">儲存到 Sheets</button>
+        <div id="session-save-msg" class="msg" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- 全勤管理 tab -->
+    <div id="tab-progress" style="display:none;">
+      <div style="font-size:13px; color:var(--ink-soft); margin-bottom:1rem; line-height:1.6;">
+        點擊切換每位師兄的全勤狀態，會即時更新 Google Sheets「學員資料」的「進度」欄位。
+      </div>
+      <div id="progress-grid" class="student-grid"></div>
+      <div id="progress-save-msg" class="msg" style="display:none; margin-top:0.8rem;"></div>
+    </div>
+
+    <button class="btn btn-teal" onclick="refreshAdminData()">
+      重新整理（同步 Sheets）
+    </button>
+
+    <button class="btn btn-secondary" style="color:#991B1B; border-color:#FECACA;" onclick="clearLog()">
+      清除本機紀錄
+    </button>
+
+    <button class="btn btn-secondary" onclick="doAdminLogout()">
+      登出
+    </button>
+  </div>
+</div>
+
+<script>
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  ★  GAS 網址設定  ★  每次重新部署後在此更新網址             ║
+// ╚══════════════════════════════════════════════════════════════╝
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyS2uMFr8qZ7CU3uyvq1A0xb3zi5qt7sdibCuzyjWDDTFWkpzTjgVBOw05zJQRGhinwYw/exec';
+// ──────────────────────────────────────────────────────────────
+
+// ════════════════════════════════════════════
+// 配置
+// ════════════════════════════════════════════
+
+let students      = [];
+let gasLog        = [];   // 從 GAS 拉回的紀錄（跨裝置同步）
+let currentStudent = null;
+let chatHistory   = [];
+
+// ════════════════════════════════════════════
+// 初始化
+// ════════════════════════════════════════════
+async function init() {
+  // 並行拉取學員名單 + 堂次 + 報到紀錄
+  await Promise.allSettled([
+    loadStudents(),
+    updateLessonBanner(),
+    loadGasLog()
+  ]);
+  updateHomeStats();
+}
+
+async function loadStudents() {
+  try {
+    const resp = await fetch(GAS_URL + '?action=getStudents');
+    const data = await resp.json();
+    if (data.success && data.data) students = data.data;
+  } catch(e) {
+    console.warn('loadStudents 失敗');
+  }
+}
+
+// 從 GAS 拉取本日報到紀錄（跨裝置同步的核心）
+async function loadGasLog() {
+  try {
+    const resp = await fetch(GAS_URL + '?action=getCheckinLog');
+    const data = await resp.json();
+    if (data.success && data.data) {
+      gasLog = data.data; // [{ studentId, name, dharma, session, reason, time }, ...]
+    }
+  } catch(e) {
+    console.warn('loadGasLog 失敗，統計可能不準確');
+  }
+}
+
+async function updateLessonBanner() {
+  try {
+    const resp = await fetch(GAS_URL + '?action=getSessionInfo');
+    const data = await resp.json();
+    if (!data.success || !data.data) throw new Error();
+
+    const { date, lesson } = data.data; // A欄=日期, B欄=堂次
+    const banner = document.getElementById('lesson-banner');
+    if (banner && lesson) {
+      banner.textContent = `${date} · 第 ${lesson} 堂　出席調查`;
+    }
+  } catch(e) {
+    const banner = document.getElementById('lesson-banner');
+    if (banner) banner.textContent = '出席調查';
+  }
+}
+
+// 首頁統計：以 gasLog 為主（跨裝置同步）
+function updateHomeStats() {
+  const total    = 17;
+  const attendIds = new Set(gasLog.filter(l => l.session === '出席').map(l => l.studentId));
+  const leaveIds  = new Set(gasLog.filter(l => l.session === '請假').map(l => l.studentId));
+  const checkedIds = new Set(gasLog.map(l => l.studentId));
+  const pending   = total - checkedIds.size;
+  const el_a = document.getElementById('hs-attend');
+  const el_l = document.getElementById('hs-leave');
+  const el_p = document.getElementById('hs-pending');
+  if (el_a) el_a.textContent = attendIds.size;
+  if (el_l) el_l.textContent = leaveIds.size;
+  if (el_p) el_p.textContent = pending < 0 ? 0 : pending;
+}
+
+init();
+
+// ════════════════════════════════════════════
+// 螢幕導航
+// ════════════════════════════════════════════
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+  const screen = document.getElementById(screenId);
+  if (screen) screen.classList.add('active');
+}
+
+function hideMsg(msgId) {
+  const el = document.getElementById(msgId);
+  if (el) el.classList.remove('show');
+}
+
+function showError(msgId, text) {
+  const el = document.getElementById(msgId);
+  if (el) { el.textContent = text; el.classList.add('show'); }
+}
+
+// ════════════════════════════════════════════
+// 學員報到流程
+// ════════════════════════════════════════════
+function handleStudentLogin() {
+  hideMsg('home-error');
+  const code = (document.getElementById('login-code').value || '').trim();
+  if (!code) { showError('home-error', '請輸入登入碼'); return; }
+
+  const student = students.find(s => String(s.id).trim() === code);
+  if (!student) { showError('home-error', '查無此登入碼，請確認'); return; }
+
+  // 防重複：檢查 gasLog，已報到則提示並提供更改選項
+  const existing = gasLog.find(l => l.studentId === student.id);
+  if (existing) {
+    const dharmaStr = student.dharma_name ? `（${student.dharma_name}師兄）` : '';
+    const statusText = existing.session === '請假'
+      ? `請假　事由：${existing.reason || '未填'}`
+      : existing.session;
+    // 顯示已報到提示，並提供更改按鈕
+    const errEl = document.getElementById('home-error');
+    errEl.innerHTML =
+      `${student.name}${dharmaStr} 已報到（${statusText}　${existing.time}）<br>` +
+      `<button onclick="proceedCheckin('${code}')" style="margin-top:8px;padding:7px 16px;border-radius:7px;border:none;background:var(--teal);color:#fff;font-size:13px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;font-weight:500;">更改報到結果</button>`;
+    errEl.classList.add('show');
+    document.getElementById('login-code').value = '';
+    return;
+  }
+
+  proceedCheckin(code);
+}
+
+// 實際進入報到頁（首次或更改）
+function proceedCheckin(code) {
+  hideMsg('home-error');
+  const student = students.find(s => String(s.id).trim() === code)
+    || currentStudent;
+  if (!student) return;
+
+  currentStudent = student;
+  chatHistory    = [];
+
+  // 顯示姓名　法名師兄
+  const dn = student.dharma_name
+    ? `${student.name}　${student.dharma_name}師兄`
+    : student.name;
+  document.getElementById('student-display').textContent = dn;
+
+  // 重置畫面
+  document.getElementById('ai-loading').style.display = 'block';
+  document.getElementById('ai-greeting-content').style.display = 'none';
+  document.getElementById('ai-greeting-box').style.display = 'block';
+  document.getElementById('checkin-result').style.display = 'none';
+  document.getElementById('session-select').value = '';
+  document.getElementById('absence-reason-field').style.display = 'none';
+  document.getElementById('absence-reason').value = '';
+  selectStatus('');
+
+  showScreen('screen-checkin');
+  loadAIGreeting();
+}
+
+async function loadAIGreeting() {
+  try {
+    const resp = await fetch(GAS_URL +
+      '?action=generateFeedback' +
+      '&student=' + encodeURIComponent(JSON.stringify(currentStudent)) +
+      '&session=問候'
+    );
+    const data = await resp.json();
+    if (!data.success) throw new Error(data.error);
+    const fb = data.data;
+    document.getElementById('greeting-text').innerHTML =
+      `<div style="margin-bottom:0.5rem;">${fb.welcome}</div>` +
+      `<div style="margin-bottom:0.5rem;">${fb.progress}</div>` +
+      `<div>${fb.practice}</div>`;
+  } catch(e) {
+    document.getElementById('greeting-text').innerHTML =
+      `<div>阿彌陀佛 🙏</div><div style="margin-top:0.4rem;">歡迎回來，請選擇今日出席狀態。</div>`;
+  }
+  document.getElementById('ai-loading').style.display = 'none';
+  document.getElementById('ai-greeting-content').style.display = 'block';
+}
+
+function setAiStatus(state, text) {
+  const dot   = document.getElementById('ai-dot');
+  const label = document.getElementById('ai-status-text');
+  if (!dot || !label) return;
+  dot.className    = 'ai-dot ' + state;
+  label.textContent = text;
+}
+
+function selectStatus(val) {
+  const btnA = document.getElementById('btn-attend');
+  const btnB = document.getElementById('btn-absent');
+  if (!val) {
+    if (btnA) { btnA.style.background='#fff'; btnA.style.color='var(--ink)'; btnA.style.borderColor='rgba(196,150,74,0.22)'; btnA.innerHTML='出席'; }
+    if (btnB) { btnB.style.background='#fff'; btnB.style.color='var(--ink)'; btnB.style.borderColor='rgba(196,150,74,0.22)'; btnB.innerHTML='請假'; }
+    document.getElementById('absence-reason-field').style.display = 'none';
+    return;
+  }
+  document.getElementById('session-select').value = val;
+  const btnAttend = document.getElementById('btn-attend');
+  const btnAbsent = document.getElementById('btn-absent');
+  if (val === '出席') {
+    btnAttend.style.background  = 'var(--teal-light)';
+    btnAttend.style.borderColor = 'var(--teal)';
+    btnAttend.style.color       = 'var(--teal)';
+    btnAttend.style.fontWeight  = '600';
+    btnAbsent.style.background  = '#fff';
+    btnAbsent.style.borderColor = 'var(--border)';
+    btnAbsent.style.color       = 'var(--ink)';
+    btnAbsent.style.fontWeight  = '400';
+  } else {
+    btnAbsent.style.background  = '#FEF2F2';
+    btnAbsent.style.borderColor = '#FECACA';
+    btnAbsent.style.color       = '#991B1B';
+    btnAbsent.style.fontWeight  = '600';
+    btnAttend.style.background  = '#fff';
+    btnAttend.style.borderColor = 'var(--border)';
+    btnAttend.style.color       = 'var(--ink)';
+    btnAttend.style.fontWeight  = '400';
+  }
+  document.getElementById('absence-reason-field').style.display = val === '請假' ? 'block' : 'none';
+}
+
+function toggleAbsenceReason() {}
+
+async function handleCheckin() {
+  hideMsg('checkin-error');
+  const status = (document.getElementById('session-select').value || '').trim();
+  if (!status) { showError('checkin-error', '請選擇出席狀態'); return; }
+
+  const reason = status === '請假'
+    ? (document.getElementById('absence-reason').value || '').trim()
+    : '';
+  if (status === '請假' && !reason) {
+    showError('checkin-error', '請填寫請假事由');
+    return;
+  }
+
+  const btn = event.target;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>';
+
+  try {
+    const time = new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    // 判斷是否為更改（已有舊紀錄）
+    const isUpdate = gasLog.some(l => l.studentId === currentStudent.id);
+
+    // 寫入 GAS（update=1 時 GAS 會覆蓋舊紀錄）
+    await fetch(GAS_URL + '?action=checkin' +
+      '&studentId=' + encodeURIComponent(currentStudent.id) +
+      '&name='      + encodeURIComponent(currentStudent.name) +
+      '&dharma='    + encodeURIComponent(currentStudent.dharma_name || '') +
+      '&session='   + encodeURIComponent(status) +
+      '&feedback='  + encodeURIComponent(reason) +
+      '&update='    + (isUpdate ? '1' : '0')
+    );
+
+    // 同步更新本地 gasLog（覆蓋或新增）
+    const idx = gasLog.findIndex(l => l.studentId === currentStudent.id);
+    const entry = { studentId: currentStudent.id, name: currentStudent.name, dharma: currentStudent.dharma_name, session: status, reason, time };
+    if (idx >= 0) gasLog[idx] = entry;
+    else          gasLog.push(entry);
+    updateHomeStats();
+
+    document.getElementById('ai-greeting-box').style.display = 'none';
+    document.getElementById('checkin-result').style.display  = 'block';
+
+  } catch(e) {
+    showError('checkin-error', '送出失敗，請檢查網路後重試');
+  } finally {
+    btn.disabled  = false;
+    btn.textContent = '確認送出';
+  }
+}
+
+function doAnotherCheckin() {
+  currentStudent = null;
+  chatHistory    = [];
+  document.getElementById('login-code').value = '';
+  showScreen('screen-home');
+}
+
+// ════════════════════════════════════════════
+// 學長管理
+// ════════════════════════════════════════════
+function handleAdminLogin() {
+  hideMsg('admin-login-error');
+  const pwd = (document.getElementById('admin-pwd').value || '').trim();
+  if (pwd !== '7777') { showError('admin-login-error', '密碼不正確'); return; }
+  document.getElementById('admin-pwd').value = '';
+  refreshAdminData();
+  showScreen('screen-admin');
+}
+
+// 重新整理：從 GAS 拉最新資料，確保跨裝置同步
+async function refreshAdminData() {
+  // 顯示讀取中狀態
+  document.getElementById('admin-date').textContent = '同步中…';
+  await Promise.allSettled([loadStudents(), loadGasLog()]);
+  renderAdmin();
+}
+
+function switchAdminTab(tab) {
+  const tabs = ['status','log','session','progress'];
+  tabs.forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+    const btn = document.getElementById('tab-btn-' + t);
+    const active = t === tab;
+    btn.style.background = active ? 'var(--teal)' : '#fff';
+    btn.style.color      = active ? '#fff' : 'var(--ink)';
+    btn.style.border     = active ? 'none' : '1px solid var(--border)';
+  });
+  if (tab === 'session')  renderSessionTab();
+  if (tab === 'progress') renderProgressGrid();
+}
+
+// ════════════════════════════════════════════
+// 課程設定
+// ════════════════════════════════════════════
+let sessionList = []; // 從 GAS 拉回的課程清單
+
+async function renderSessionTab() {
+  const listEl = document.getElementById('session-list');
+  listEl.innerHTML = '<div style="font-size:13px;color:var(--ink-soft);padding:8px 0;">讀取中…</div>';
+  try {
+    const resp = await fetch(GAS_URL + '?action=getAllSessions');
+    const data = await resp.json();
+    sessionList = (data.success && data.data) ? data.data : [];
+  } catch(e) { sessionList = []; }
+
+  if (sessionList.length === 0) {
+    listEl.innerHTML = '<div style="font-size:13px;color:var(--ink-soft);padding:8px 0;">尚無課程設定</div>';
+    return;
+  }
+  listEl.innerHTML = '';
+  sessionList.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:9px;padding:10px 12px;';
+    row.innerHTML = `
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:500;color:var(--ink);">${s.date}</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:2px;">第 ${s.lesson} 堂</div>
+      </div>
+      <button onclick="deleteSession('${s.date}')" style="padding:5px 10px;border-radius:6px;border:1px solid #FECACA;background:#FEF2F2;color:#991B1B;font-size:12px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;">刪除</button>
+    `;
+    listEl.appendChild(row);
+  });
+}
+
+async function saveSession() {
+  const dateVal   = document.getElementById('new-session-date').value;
+  const lessonVal = document.getElementById('new-session-lesson').value.trim();
+  const msgEl     = document.getElementById('session-save-msg');
+  const btn       = document.getElementById('save-session-btn');
+
+  if (!dateVal) { showTabMsg('session-save-msg', 'error', '請選擇日期'); return; }
+  if (!lessonVal || isNaN(lessonVal)) { showTabMsg('session-save-msg', 'error', '請填入堂數（數字）'); return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>';
+
+  // 日期格式轉為 yyyy/MM/dd
+  const d = new Date(dateVal);
+  const dateStr = `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+
+  try {
+    const resp = await fetch(GAS_URL +
+      '?action=saveSession' +
+      '&date='   + encodeURIComponent(dateStr) +
+      '&lesson=' + encodeURIComponent(lessonVal)
+    );
+    const data = await resp.json();
+    if (!data.success) throw new Error(data.error);
+    showTabMsg('session-save-msg', 'success', `✓ 已儲存：${dateStr} 第 ${lessonVal} 堂`);
+    document.getElementById('new-session-date').value   = '';
+    document.getElementById('new-session-lesson').value = '';
+    renderSessionTab(); // 重新整理列表
+  } catch(e) {
+    showTabMsg('session-save-msg', 'error', '儲存失敗，請確認 GAS 已部署');
+  }
+  btn.disabled = false;
+  btn.textContent = '儲存到 Sheets';
+}
+
+async function deleteSession(date) {
+  if (!confirm(`確定刪除 ${date} 的課程設定？`)) return;
+  try {
+    const resp = await fetch(GAS_URL + '?action=deleteSession&date=' + encodeURIComponent(date));
+    const data = await resp.json();
+    if (data.success) renderSessionTab();
+  } catch(e) {}
+}
+
+// ════════════════════════════════════════════
+// 全勤管理
+// ════════════════════════════════════════════
+function renderProgressGrid() {
+  const grid = document.getElementById('progress-grid');
+  grid.innerHTML = '';
+  students.forEach(s => {
+    const isFull = (s.progress || '').trim() === '全勤';
+    const div = document.createElement('div');
+    div.className = 'student-card' + (isFull ? ' checked-in' : '');
+    div.style.cursor = 'pointer';
+    div.onclick = () => toggleProgress(s.id, !isFull);
+    const dharmaStr = s.dharma_name ? s.dharma_name + '師兄' : '';
+    div.innerHTML = `
+      <div class="student-name">${s.name}</div>
+      ${dharmaStr ? `<div class="student-dharma">${dharmaStr}</div>` : ''}
+      <div class="student-status" style="margin-top:6px; font-size:12px; font-weight:600; color:${isFull ? 'var(--teal)' : '#9ca3af'};">
+        ${isFull ? '✓ 全勤' : '— 一般'}
+      </div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+async function toggleProgress(studentId, setFull) {
+  const newProgress = setFull ? '全勤' : '';
+  const msgEl = document.getElementById('progress-save-msg');
+
+  // 樂觀更新 UI
+  const s = students.find(s => s.id === studentId);
+  if (s) s.progress = newProgress;
+  renderProgressGrid();
+  showTabMsg('progress-save-msg', 'info', '更新中…');
+
+  try {
+    const resp = await fetch(GAS_URL +
+      '?action=setProgress' +
+      '&studentId=' + encodeURIComponent(studentId) +
+      '&progress='  + encodeURIComponent(newProgress)
+    );
+    const data = await resp.json();
+    if (!data.success) throw new Error(data.error);
+    showTabMsg('progress-save-msg', 'success', `✓ 已更新 ${s ? s.name : ''} → ${newProgress || '一般'}`);
+  } catch(e) {
+    // 復原
+    if (s) s.progress = setFull ? '' : '全勤';
+    renderProgressGrid();
+    showTabMsg('progress-save-msg', 'error', '更新失敗，請重試');
+  }
+}
+
+function showTabMsg(id, type, text) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'msg msg-' + (type === 'success' ? 'success' : type === 'info' ? 'info' : 'error');
+  el.style.display = 'block';
+  if (type === 'success') setTimeout(() => { el.style.display = 'none'; }, 3000);
+}
+
+function renderAdmin() {
+  const now = new Date();
+  document.getElementById('admin-date').textContent = now.toLocaleString('zh-TW', {
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    weekday: 'short', hour: '2-digit', minute: '2-digit'
+  });
+
+  const attendIds  = new Set(gasLog.filter(l => l.session === '出席').map(l => l.studentId));
+  const leaveIds   = new Set(gasLog.filter(l => l.session === '請假').map(l => l.studentId));
+  const checkedIds = new Set(gasLog.map(l => l.studentId));
+  const total = students.length;
+  const rate  = total > 0 ? Math.round(attendIds.size / total * 100) : 0;
+
+  document.getElementById('stat-total').textContent     = total;
+  document.getElementById('stat-checkedin').textContent = attendIds.size;
+  document.getElementById('stat-pending').textContent   = leaveIds.size + (total - checkedIds.size);
+  document.getElementById('stat-rate').textContent      = rate + '%';
+
+  // 學員狀態格
+  const grid = document.getElementById('student-grid');
+  grid.innerHTML = '';
+  students.forEach(s => {
+    const log    = gasLog.filter(l => l.studentId === s.id).slice(-1)[0];
+    const status = log ? log.session : null;
+    const div    = document.createElement('div');
+    div.className = 'student-card' +
+      (status === '出席' ? ' checked-in' : status === '請假' ? ' leave' : '');
+    const dharmaStr = s.dharma_name ? s.dharma_name + '師兄' : '';
+    div.innerHTML = `
+      <div class="student-name">${s.name}</div>
+      ${dharmaStr ? `<div class="student-dharma">${dharmaStr}</div>` : ''}
+      <div class="student-status">${
+        status === '出席' ? '✓ 出席' :
+        status === '請假' ? '△ 請假' : '— 未回報'
+      }</div>
+      ${log && log.time ? `<div style="font-size:10px;color:var(--ink-soft);margin-top:2px;">${log.time}</div>` : ''}
+    `;
+    grid.appendChild(div);
+  });
+
+  // 報到紀錄列表（倒序）
+  const logList  = document.getElementById('checkin-log-list');
+  const logEmpty = document.getElementById('log-empty');
+  logList.innerHTML = '';
+  const reversed = [...gasLog].reverse();
+  if (reversed.length === 0) {
+    logEmpty.style.display = 'block';
+  } else {
+    logEmpty.style.display = 'none';
+    reversed.forEach(l => {
+      const isAttend = l.session === '出席';
+      const item     = document.createElement('div');
+      item.style.cssText = `background:${isAttend ? 'rgba(26,107,90,0.06)' : '#FEF2F2'};border:1px solid ${isAttend ? 'rgba(26,107,90,0.2)' : '#FECACA'};border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;`;
+      const dharmaStr = l.dharma ? l.dharma + '師兄' : '';
+      item.innerHTML = `
+        <div style="width:36px;height:36px;border-radius:50%;background:${isAttend ? 'var(--teal-light)' : '#FEE2E2'};color:${isAttend ? 'var(--teal)' : '#991B1B'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;">
+          ${l.name ? l.name.slice(-1) : '？'}
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:500;color:var(--ink);">${l.name}${dharmaStr ? `<span style="font-size:11px;color:var(--ink-soft);font-weight:400;margin-left:6px;">${dharmaStr}</span>` : ''}</div>
+          <div style="font-size:11px;color:var(--ink-soft);margin-top:2px;">${l.time}　<span style="color:${isAttend ? 'var(--teal)' : '#991B1B'};font-weight:500;">${l.session}</span></div>
+          ${l.reason ? `<div style="font-size:12px;color:var(--ink-soft);margin-top:5px;background:rgba(0,0,0,0.04);border-radius:6px;padding:6px 8px;line-height:1.6;">事由：${l.reason}</div>` : ''}
+        </div>
+      `;
+      logList.appendChild(item);
+    });
+  }
+}
+
+function doAdminLogout() {
+  showScreen('screen-home');
+}
+</script>
+
+</body>
+</html>
