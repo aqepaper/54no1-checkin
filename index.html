@@ -400,18 +400,20 @@ input::placeholder { color: var(--ink-soft); opacity: 0.5; }
 }
 
 .student-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 0.8rem;
-  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 0.5rem;
 }
 
 .student-card {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 14px;
-  padding: 1rem 0.5rem;
-  text-align: center;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   cursor: default;
   transition: all 0.2s;
 }
@@ -426,31 +428,32 @@ input::placeholder { color: var(--ink-soft); opacity: 0.5; }
   border-color: #FECACA;
 }
 
-.student-card.leave .student-status {
-  color: #991B1B;
-}
-
 .student-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--ink);
-  margin-bottom: 4px;
 }
 
 .student-dharma {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--ink-soft);
-  margin-bottom: 4px;
+  margin-top: 2px;
 }
 
 .student-status {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--teal);
   font-weight: 400;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
-.student-card:not(.checked-in) .student-status {
+.student-card:not(.checked-in):not(.leave) .student-status {
   color: #9ca3af;
+}
+
+.student-card.leave .student-status {
+  color: #991B1B;
 }
 </style>
 </head>
@@ -1101,7 +1104,7 @@ function resetStats() {
 function renderProgressGrid() {
   const grid = document.getElementById('progress-grid');
   grid.innerHTML = '';
-  students.forEach(s => {
+  students.forEach((s, idx) => {
     const isFull = (s.progress || '').trim() === '全勤';
     const div = document.createElement('div');
     div.className = 'student-card' + (isFull ? ' checked-in' : '');
@@ -1109,9 +1112,11 @@ function renderProgressGrid() {
     div.onclick = () => toggleProgress(s.id, !isFull);
     const dharmaStr = s.dharma_name ? s.dharma_name + '師兄' : '';
     div.innerHTML = `
-      <div class="student-name">${s.name}</div>
-      ${dharmaStr ? `<div class="student-dharma">${dharmaStr}</div>` : ''}
-      <div class="student-status" style="margin-top:6px; font-size:12px; font-weight: 400; color:${isFull ? 'var(--teal)' : '#9ca3af'};">
+      <div style="width:32px;height:32px;border-radius:50%;background:${isFull?'rgba(45,93,79,0.15)':'#F1EFE8'};display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--ink-soft);flex-shrink:0;">${idx+1}</div>
+      <div style="flex:1;min-width:0;">
+        <div class="student-name">${s.name}${dharmaStr ? `<span style="font-size:11px;color:var(--ink-soft);margin-left:6px;">${dharmaStr}</span>` : ''}</div>
+      </div>
+      <div style="font-size:13px;flex-shrink:0;color:${isFull?'var(--teal)':'#9ca3af'};">
         ${isFull ? '✓ 全勤' : '— 一般'}
       </div>
     `;
@@ -1179,7 +1184,7 @@ function renderAdmin() {
   // 學員狀態格
   const grid = document.getElementById('student-grid');
   grid.innerHTML = '';
-  students.forEach(s => {
+  students.forEach((s, idx) => {
     const log    = gasLog.filter(l => l.studentId === s.id).slice(-1)[0];
     const status = log ? log.session : null;
     const div    = document.createElement('div');
@@ -1187,13 +1192,15 @@ function renderAdmin() {
       (status === '出席' ? ' checked-in' : status === '請假' ? ' leave' : '');
     const dharmaStr = s.dharma_name ? s.dharma_name + '師兄' : '';
     div.innerHTML = `
-      <div class="student-name">${s.name}</div>
-      ${dharmaStr ? `<div class="student-dharma">${dharmaStr}</div>` : ''}
-      <div class="student-status">${
+      <div style="width:32px;height:32px;border-radius:50%;background:${status==='出席'?'rgba(45,93,79,0.15)':status==='請假'?'#FEE2E2':'#F1EFE8'};display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--ink-soft);flex-shrink:0;">${idx+1}</div>
+      <div style="flex:1;min-width:0;">
+        <div class="student-name">${s.name}${dharmaStr ? `<span style="font-size:11px;color:var(--ink-soft);margin-left:6px;">${dharmaStr}</span>` : ''}</div>
+        ${log && log.time ? `<div style="font-size:11px;color:var(--ink-soft);margin-top:2px;">${log.time}</div>` : ''}
+      </div>
+      <div class="student-status" style="font-size:13px;flex-shrink:0;">${
         status === '出席' ? '✓ 出席' :
         status === '請假' ? '△ 請假' : '— 未回報'
       }</div>
-      ${log && log.time ? `<div style="font-size:10px;color:var(--ink-soft);margin-top:2px;">${log.time}</div>` : ''}
     `;
     grid.appendChild(div);
   });
